@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import './index.css';
 import { ChevronRight, CheckCircle, ShieldCheck, ChevronDown } from 'lucide-react';
-
-// Importação dos módulos do Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
-
-// Importação dos estilos do Swiper
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -74,13 +70,13 @@ const App = () => {
   return (
     <div className="bg-black text-gray-100 font-sans selection:bg-orange-500 selection:text-white">
 
-      {/* --- HERO SECTION --- */}
+      {/* --- INICIAL SECTION --- */}
       <header className="relative min-h-[90vh] flex items-center bg-black overflow-hidden border-b border-orange-900/30">
         <div className="absolute top-1/2 left-[-10%] -translate-y-1/2 w-[500px] lg:w-[800px] h-[500px] lg:h-[800px] bg-orange-600/15 blur-[150px] rounded-full z-0 pointer-events-none"></div>
 
         <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full z-10 opacity-30 lg:opacity-100 pointer-events-none">
           <img
-            src="/images/BACKGROUND.PNG" /* Nome da imagem atualizado conforme solicitado */
+            src="/images/BACKGROUND.PNG"
             alt="Estudante com óculos de IA"
             className="w-full h-full object-cover object-center"
           />
@@ -91,7 +87,7 @@ const App = () => {
         <div className="max-w-7xl mx-auto w-full px-6 relative z-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
-            <div className="text-center lg:text-left flex flex-col items-center lg:items-start justify-center py-24">
+              <div className="flex flex-col items-start justify-center py-24 text-left">
               <div className="inline-block px-4 py-1 border border-orange-500/30 rounded-full bg-orange-500/5 text-orange-500 text-xs font-bold mb-6 tracking-widest uppercase shadow-[0_0_15px_rgba(234,88,12,0.1)]">
                 A Revolução da Inteligência Artificial
               </div>
@@ -117,29 +113,61 @@ const App = () => {
         </div>
       </header>
 
+      {/*  VIDEO SECTION  */}
+      <section className="py-24 bg-black relative z-10 border-b border-zinc-900 overflow-hidden">
+        {/* Glow de fundo sutil para destacar o vídeo */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-orange-600/10 blur-[100px] rounded-full z-0 pointer-events-none"></div>
+
+        <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
+
+          <div className="mb-10">
+            <h2 className="text-3xl md:text-4xl font-black mb-4 italic uppercase tracking-tight">
+              VEJA COMO O MÉTODO <span className="text-orange-600">FUNCIONA</span>
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Descubra em poucos minutos como você pode transformar a Inteligência Artificial na sua ferramenta mais lucrativa.
+            </p>
+          </div>
+
+          {/* Container do Vídeo */}
+          <div className="relative aspect-video w-full bg-zinc-900 border border-zinc-800 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.8)] overflow-hidden">
+            <video
+              src="/images/VENDAS.mp4"
+              controls
+              preload="metadata"
+              poster="/images/BACKGROUND.PNG" //
+              className="w-full h-full object-cover"
+            >
+              Seu navegador não suporta o formato de vídeo.
+            </video>
+          </div>
+
+        </div>
+      </section>
+
       {/* --- CARROSSEL DE MÓDULOS --- */}
-      <section className="pb-20 bg-zinc-950 px-6 relative z-10">
+      <section className="py-16 bg-zinc-950 px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black mb-4 italic uppercase tracking-tight py-2">O QUE VOCÊ VAI APRENDER</h2>
             <div className="h-1 w-20 bg-orange-600 mx-auto"></div>
           </div>
 
           <Swiper
             modules={[Pagination, Autoplay]}
-            spaceBetween={30}
+            spaceBetween={25}
             slidesPerView={1}
             pagination={{ clickable: true }}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
             breakpoints={{
-              640: { slidesPerView: 2 },
+              768: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
-            className="pb-20 !overflow-visible"
+            className="pb-16 !overflow-visible"
           >
             {modulos.map((modulo) => (
               <SwiperSlide key={modulo.id} className="py-4">
-                <div className="bg-zinc-900 border border-zinc-800 p-3 rounded-[2rem] hover:border-orange-600 transition-all group overflow-hidden shadow-2xl flex flex-col h-full">
+                <div className="bg-zinc-900 border border-zinc-800 p-3 rounded-[2rem] hover:border-orange-600 transition-all group overflow-hidden shadow-2xl flex flex-col h-full max-w-sm mx-auto">
                   <div className="w-full rounded-[1.5rem] overflow-hidden bg-black flex items-center justify-center">
                     <img
                       src={`/images/${modulo.img}`}
@@ -160,13 +188,13 @@ const App = () => {
         </div>
       </section>
 
-      {/* --- PRICING SECTION --- (Movido para cima) */}
+      {/* --- PRICING SECTION --- */}
       <section id="precos" className="py-24 px-6 relative bg-black z-10 border-t border-zinc-900">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-black mb-16 uppercase italic">ESCOLHA SEU PLANO</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Plano Mensal */}
+            {/* Preificação (mensal) */}
             <div className="p-10 rounded-3xl bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 transition-all flex flex-col">
               <h4 className="text-xl font-bold mb-2">Acesso Mensal</h4>
               <div className="text-4xl font-black mb-6">R$ 29,90<span className="text-sm font-normal text-gray-500">/mês</span></div>
@@ -178,7 +206,7 @@ const App = () => {
               <button className="w-full py-3 rounded-xl border border-zinc-700 font-bold hover:bg-zinc-800 transition-colors mt-auto cursor-not-allowed opacity-50">EM BREVE</button>
             </div>
 
-            {/* Plano Anual - Destaque */}
+            {/* Preificação (anual) */}
             <div className="p-10 rounded-3xl bg-orange-600 border border-orange-400 shadow-[0_0_40px_rgba(234,88,12,0.2)] transform md:scale-105 relative overflow-hidden flex flex-col">
               <div className="absolute top-4 right-[-35px] bg-white text-orange-600 text-[10px] font-black px-10 py-1 rotate-45 uppercase">Popular</div>
               <h4 className="text-xl font-bold mb-2">Acesso Anual</h4>
@@ -195,7 +223,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* --- FAQ SECTION --- (Movido para baixo) */}
+      {/* --- FAQ SECTION --- */}
       <section className="py-24 bg-zinc-950 px-6 relative z-10 border-t border-zinc-900">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
@@ -247,13 +275,13 @@ const App = () => {
         .swiper-pagination-bullet {
           background: #444 !important;
           opacity: 1 !important;
-          width: 10px !important; /* Fixa o tamanho inicial */
+          width: 10px !important;
           border-radius: 10px !important;
-          transition: width 0.3s ease, background-color 0.3s ease !important; /* Animação suave na base */
+          transition: width 0.3s ease, background-color 0.3s ease !important;
         }
         .swiper-pagination-bullet-active {
           background: #ea580c !important;
-          width: 35px !important; /* Tamanho quando esticada */
+          width: 35px !important;
         }
         .swiper-pagination { bottom: 0 !important; }
         html { scroll-behavior: smooth; }
