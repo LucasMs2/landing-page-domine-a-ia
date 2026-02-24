@@ -130,16 +130,18 @@ const App = () => {
           </div>
 
           {/* Container do Vídeo */}
-          <div className="relative aspect-video w-full bg-zinc-900 border border-zinc-800 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.8)] overflow-hidden">
-            <video
-              src="/images/VENDAS.mp4"
-              controls
-              preload="metadata"
-              poster="/images/BACKGROUND.PNG" //
-              className="w-full h-full object-cover"
-            >
-              Seu navegador não suporta o formato de vídeo.
-            </video>
+          <div className="relative aspect-video w-full bg-black border border-zinc-800 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.8)] overflow-hidden">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/0kFiLzkKWoU?rel=0&modestbranding=1"
+              title="Apresentação do Método IA PRO"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              className="w-full h-full absolute top-0 left-0"
+            ></iframe>
           </div>
 
         </div>
