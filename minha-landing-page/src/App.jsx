@@ -97,7 +97,7 @@ const App = () => {
               </h1>
 
               <p className="text-gray-300 text-lg mb-10 max-w-xl font-medium drop-shadow leading-relaxed">
-                Aprenda a criar prompts profissionais, automações e conteúdos de alto nível com as ferramentas mais avançadas do mercado.
+                Aprenda a criar comerciais de alto nível e sessões de fotos de produtos profissionais com as ferramentas mais avançadas do mercado.
               </p>
 
               <div className="flex flex-col items-center gap-3 w-full lg:w-auto">
