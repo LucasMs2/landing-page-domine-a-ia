@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 const PrimaryButton = ({ children }) => (
-  <a href="#precos" className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(234,88,12,0.4)] flex items-center justify-center gap-2 cursor-pointer">
+  <a href="#oferta" className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(234,88,12,0.4)] flex items-center justify-center gap-2 cursor-pointer">
     {children}
     <ChevronRight size={20} />
   </a>
@@ -68,7 +68,7 @@ const App = () => {
   };
 
   return (
-    <div className="bg-black text-gray-100 font-sans selection:bg-orange-500 selection:text-white">
+    <div className="bg-black text-gray-100 font-sans selection:bg-orange-500 selection:text-white overflow-x-hidden w-full relative">
 
       {/* --- INICIAL SECTION --- */}
       <header className="relative min-h-[90vh] flex items-center bg-black overflow-hidden border-b border-orange-900/30">
@@ -202,7 +202,7 @@ const App = () => {
               <p className="text-sm font-medium mb-4 text-gray-400">ACESSO ANUAL</p>
 
               <div className="text-4xl font-black mb-1 line-through text-gray-500">R$ 497</div>
-              <p className="text-sm mb-6 text-gray-500 line-through">ou 12x de R$ 49,70</p>
+              <p className="text-sm mb-6 text-gray-500 line-through">ou 10x de R$ 51,29</p>
 
               <ul className="text-left space-y-3 mb-10 text-gray-500 text-sm flex-grow">
                 <li className="flex items-center gap-2"><CheckCircle size={16} /> Módulo 1 – Gerando Imagens Profissionais</li>
@@ -220,7 +220,7 @@ const App = () => {
               </div>
             </div>
 
-            <div className="p-10 rounded-3xl bg-orange-600 border border-orange-400 shadow-[0_0_40px_rgba(234,88,12,0.3)] transform md:scale-105 relative overflow-hidden flex flex-col z-10">
+              <div id="oferta" className="p-10 rounded-3xl bg-orange-600 border border-orange-400 shadow-[0_0_40px_rgba(234,88,12,0.3)] transform md:scale-105 relative overflow-hidden flex flex-col z-10 scroll-mt-8">
               <div className="absolute top-4 right-[-35px] bg-white text-orange-600 text-[10px] font-black px-10 py-1 rotate-45 uppercase">
                 Oferta
               </div>
@@ -230,7 +230,7 @@ const App = () => {
 
               <div className="text-lg font-bold text-orange-300 line-through mb-1">De R$ 497</div>
               <div className="text-5xl font-black mb-2 text-white">R$ 97</div>
-              <p className="text-sm font-bold mb-6 text-white">ou 12x de R$ 9,74</p>
+              <p className="text-sm font-bold mb-6 text-white">ou 10x de R$ 11,66</p>
 
               <ul className="text-left space-y-3 mb-10 text-white text-sm flex-grow font-medium">
                 <li className="flex items-start gap-2"><CheckCircle size={18} className="mt-0.5 flex-shrink-0" /> Módulo 1 – Gerando Imagens Profissionais</li>
@@ -298,11 +298,8 @@ const App = () => {
 
       {/* --- FOOTER --- */}
       <footer className="py-12 bg-black border-t border-zinc-900 text-center text-gray-600 text-sm relative z-10">
-        <p>© 2026 IA PRO - Todos os direitos reservados.</p>
+        <p>© Todos os direitos reservados a Matheus Cunha.</p>
         <div className="flex justify-center gap-6 mt-4">
-          <a href="#" className="hover:text-orange-500 transition-colors">Privacidade</a>
-          <a href="#" className="hover:text-orange-500 transition-colors">Termos de Uso</a>
-          <a href="#" className="hover:text-orange-500 transition-colors">Suporte</a>
         </div>
       </footer>
 
