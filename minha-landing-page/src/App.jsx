@@ -298,7 +298,7 @@ const App = () => {
 
       {/* --- FOOTER --- */}
       <footer className="py-12 bg-black border-t border-zinc-900 text-center text-gray-600 text-sm relative z-10">
-        <p>© Todos os direitos reservados a Matheus Cunha.</p>
+        <p>© Todos os direitos reservados a Matheus Costa.</p>
         <div className="flex justify-center gap-6 mt-4">
         </div>
       </footer>
