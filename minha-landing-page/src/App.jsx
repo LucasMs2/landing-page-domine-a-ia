@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './index.css';
-import { ChevronRight, CheckCircle, ShieldCheck, ChevronDown } from 'lucide-react';
+import { ChevronRight, CheckCircle, ShieldCheck, ChevronDown, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
+import { Pagination, Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 const PrimaryButton = ({ children }) => (
   <a href="#oferta" className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(234,88,12,0.4)] flex items-center justify-center gap-2 cursor-pointer">
@@ -14,7 +15,6 @@ const PrimaryButton = ({ children }) => (
 );
 
 const App = () => {
-  // Estado para controlar qual FAQ está aberto
   const [faqAberto, setFaqAberto] = useState(null);
 
   const modulos = [
@@ -25,7 +25,24 @@ const App = () => {
     { id: 5, titulo: "Editando Comercial", img: "CAPA_MÓDULO-EDITANDOOCOMERCIAL.png" },
   ];
 
-  // Perguntas e respostas
+  const antesDepoisCasos = [
+    {
+      id: 1,
+      antes: 'antes-1.jpg',
+      depois: 'depois-1.jpg',
+    },
+    {
+      id: 2,
+      antes: 'antes-2.jpg',
+      depois: 'depois-2.jpg',
+    },
+    {
+      id: 3,
+      antes: 'antes-3.jpg',
+      depois: 'depois-3.jpg',
+    },
+  ];
+
   const faqs = [
     {
       pergunta: "1 - Nunca tive contato com IA. O curso serve pra mim?",
@@ -86,7 +103,6 @@ const App = () => {
 
         <div className="max-w-7xl mx-auto w-full px-6 relative z-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-
               <div className="flex flex-col items-start justify-center py-24 text-left">
               <div className="inline-block px-4 py-1 border border-orange-500/30 rounded-full bg-orange-500/5 text-orange-500 text-xs font-bold mb-6 tracking-widest uppercase shadow-[0_0_15px_rgba(234,88,12,0.1)]">
                 A Revolução da Inteligência Artificial
@@ -107,19 +123,15 @@ const App = () => {
                 </p>
               </div>
             </div>
-
             <div className="hidden lg:block"></div>
           </div>
         </div>
       </header>
 
-      {/*  VIDEO SECTION  */}
+      {/* VIDEO SECTION  */}
       <section className="py-24 bg-black relative z-10 border-b border-zinc-900 overflow-hidden">
-        {/* Glow de fundo sutil para destacar o vídeo */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-orange-600/10 blur-[100px] rounded-full z-0 pointer-events-none"></div>
-
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
-
           <div className="mb-10">
             <h2 className="text-3xl md:text-4xl font-black mb-4 italic uppercase tracking-tight">
               VEJA COMO O MÉTODO <span className="text-orange-600">FUNCIONA</span>
@@ -128,14 +140,12 @@ const App = () => {
               Descubra em poucos minutos como você pode transformar a Inteligência Artificial na sua ferramenta mais lucrativa.
             </p>
           </div>
-
-          {/* Container do Vídeo */}
           <div className="relative aspect-video w-full bg-black border border-zinc-800 rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.8)] overflow-hidden">
             <iframe
               width="100%"
               height="100%"
               src="https://www.youtube.com/embed/0kFiLzkKWoU?rel=0&modestbranding=1"
-              title="Apresentação do Método IA PRO"
+              title="Apresentação do Método Dominando a IA"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
@@ -143,7 +153,92 @@ const App = () => {
               className="w-full h-full absolute top-0 left-0"
             ></iframe>
           </div>
+        </div>
+      </section>
 
+      {/* --- SEÇÃO ANTES E DEPOIS (ESTÁTICA POR PADRÃO) --- */}
+      <section className="py-24 bg-zinc-950 relative z-10 border-b border-zinc-900 overflow-hidden">
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-orange-600/5 blur-[120px] rounded-full z-0 pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-black mb-4 italic uppercase tracking-tight">
+              A EVOLUÇÃO VISUAL COM O <span className="text-orange-600">MÉTODO DOMINANDO A IA</span>
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto font-medium">
+              Veja como transformamos ideias comuns em produções de elite com Inteligência Artificial.
+            </p>
+            <div className="h-1 w-20 bg-orange-600 mx-auto mt-8"></div>
+          </div>
+
+          <div className="relative px-2 md:px-14 max-w-7xl mx-auto">
+
+            {/* Setas de Navegação Fixas */}
+            <button className="swiper-button-prev-ba absolute left-0 md:left-2 top-1/2 -translate-y-1/2 z-30 bg-orange-600 border-2 border-orange-400 p-3 md:p-4 rounded-full text-white hover:bg-orange-500 hover:scale-110 transition-all cursor-pointer shadow-[0_0_20px_rgba(234,88,12,0.5)] flex">
+              <ArrowLeft size={28} strokeWidth={3} />
+            </button>
+            <button className="swiper-button-next-ba absolute right-0 md:right-2 top-1/2 -translate-y-1/2 z-30 bg-orange-600 border-2 border-orange-400 p-3 md:p-4 rounded-full text-white hover:bg-orange-500 hover:scale-110 transition-all cursor-pointer shadow-[0_0_20px_rgba(234,88,12,0.5)] flex">
+              <ArrowRight size={28} strokeWidth={3} />
+            </button>
+
+            {/* Swiper sem Autoplay e com Overflow Hidden */}
+            <Swiper
+              modules={[Navigation, Pagination]}
+              slidesPerView={1}
+              spaceBetween={40}
+              loop={true}
+              grabCursor={true}
+              navigation={{
+                prevEl: '.swiper-button-prev-ba',
+                nextEl: '.swiper-button-next-ba',
+              }}
+              pagination={{ clickable: true, dynamicBullets: true }}
+              className="py-6 pb-20 rounded-3xl"
+            >
+              {antesDepoisCasos.map((caso) => (
+                <SwiperSlide key={caso.id}>
+                  <div className="flex flex-col items-center px-4 md:px-10">
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 w-full items-center">
+
+                      {/* Lado ANTES */}
+                      <div className="relative rounded-3xl overflow-hidden border-2 md:border-4 border-zinc-800 bg-zinc-900 shadow-xl">
+                        <div className="absolute top-4 left-4 md:top-6 md:left-6 bg-black/80 text-gray-400 font-bold px-5 py-2 rounded-full text-xs md:text-sm tracking-widest uppercase z-10 backdrop-blur-sm border border-zinc-700 shadow-md">
+                          Antes (Resultado Comum)
+                        </div>
+                        <img
+                          src={`/images/${caso.antes}`}
+                          alt={`Antes - ${caso.legenda}`}
+                          className="w-full h-[400px] lg:h-[600px] object-cover opacity-60 grayscale-[30%]"
+                        />
+                      </div>
+
+                      <div className="flex lg:hidden flex-shrink-0 bg-orange-600 w-12 h-12 rounded-full items-center justify-center shadow-[0_0_20px_rgba(234,88,12,0.5)] z-20 -my-10 border-4 border-zinc-950 mx-auto">
+                        <ChevronDown size={24} className="text-white" />
+                      </div>
+
+                      {/* Lado DEPOIS */}
+                      <div className="relative rounded-3xl overflow-hidden border-2 md:border-4 border-orange-600 shadow-[0_0_40px_rgba(234,88,12,0.3)] bg-black group">
+                        <div className="absolute top-4 right-4 md:top-6 md:right-6 bg-orange-600 text-white font-black px-5 py-2 rounded-full text-xs md:text-sm tracking-widest uppercase z-10 shadow-lg">
+                          Depois (Método Dominando a IA)
+                        </div>
+                        <img
+                          src={`/images/${caso.depois}`}
+                          alt={`Depois - ${caso.legenda}`}
+                          className="w-full h-[400px] lg:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                      </div>
+                    </div>
+
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+
+          <div className="mt-12 flex justify-center relative z-20">
+             <PrimaryButton>QUERO ESTES RESULTADOS AGORA</PrimaryButton>
+          </div>
         </div>
       </section>
 
@@ -165,7 +260,7 @@ const App = () => {
               768: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
-            className="pb-16 !overflow-visible"
+            className="pb-16 modulos-swiper"
           >
             {modulos.map((modulo) => (
               <SwiperSlide key={modulo.id} className="py-4">
@@ -229,8 +324,14 @@ const App = () => {
               <p className="text-sm font-bold mb-4 text-orange-200 uppercase tracking-wide">Condição Especial</p>
 
               <div className="text-lg font-bold text-orange-300 line-through mb-1">De R$ 497</div>
-              <div className="text-5xl font-black mb-2 text-white">R$ 97</div>
-              <p className="text-sm font-bold mb-6 text-white">ou 10x de R$ 11,66</p>
+
+              <div className="flex items-baseline gap-2 mb-1">
+                  <span className="text-xl font-bold text-white">10x de</span>
+                  <span className="text-5xl md:text-6xl font-black text-white tracking-tighter">R$ 11,66</span>
+                  </div>
+                  <p className="text-sm font-bold mb-6 text-orange-200 uppercase tracking-wider">
+                  ou R$ 97,00 à vista
+                  </p>
 
               <ul className="text-left space-y-3 mb-10 text-white text-sm flex-grow font-medium">
                 <li className="flex items-start gap-2"><CheckCircle size={18} className="mt-0.5 flex-shrink-0" /> Módulo 1 – Gerando Imagens Profissionais</li>
@@ -242,6 +343,7 @@ const App = () => {
                 <li className="flex items-start gap-2"><CheckCircle size={18} className="mt-0.5 flex-shrink-0" /> Atualizações futuras</li>
                 <li className="flex items-start gap-2"><CheckCircle size={18} className="mt-0.5 flex-shrink-0" /> Método validado</li>
                 <li className="flex items-start gap-2"><CheckCircle size={18} className="mt-0.5 flex-shrink-0" /> PDFs de material</li>
+                <li className="flex items-start gap-2"><CheckCircle size={18} className="mt-0.5 flex-shrink-0" /> Comunidade Exclusiva!</li>
               </ul>
 
               <a
@@ -304,6 +406,7 @@ const App = () => {
       </footer>
 
       <style>{`
+        /* Estilos Globais do Swiper (Paginação e Comportamento) */
         .swiper-pagination-bullet {
           background: #444 !important;
           opacity: 1 !important;
@@ -316,7 +419,19 @@ const App = () => {
           width: 35px !important;
         }
         .swiper-pagination { bottom: 0 !important; }
+
+        /* Apenas o carrossel de módulos pode vazar nas laterais */
+        .modulos-swiper { overflow: visible !important; }
+
+        /* Smooth Scroll para âncoras */
         html { scroll-behavior: smooth; }
+
+        /* Estilos específicos para as setas de navegação */
+        .swiper-button-disabled {
+          opacity: 0.3 !important;
+          cursor: not-allowed !important;
+          pointer-events: none !important;
+        }
       `}</style>
 
       {/* --- BOTÃO FLUTUANTE DO WHATSAPP --- */}
@@ -330,7 +445,6 @@ const App = () => {
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
 
-        {/* Balão flutuante informando o Suporte */}
         <span className="absolute right-20 bg-zinc-800 text-gray-200 text-sm font-bold px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap border border-zinc-700 shadow-xl">
           Fale com o Suporte
         </span>
