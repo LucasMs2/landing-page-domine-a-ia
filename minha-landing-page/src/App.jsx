@@ -163,7 +163,7 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-black mb-4 italic uppercase tracking-tight">
-              A EVOLUÇÃO VISUAL COM O <span className="text-orange-600">MÉTODO DOMINANDO A IA</span>
+              A EVOLUÇÃO VISUAL COM O MÉTODO <span className="text-orange-600"> DOMINANDO A IA</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto font-medium">
               Veja como transformamos ideias comuns em produções de elite com Inteligência Artificial.
@@ -325,13 +325,15 @@ const App = () => {
 
               <div className="text-lg font-bold text-orange-300 line-through mb-1">De R$ 497</div>
 
+              {/* ALTERAÇÃO SOLICITADA: INVERSÃO DOS VALORES */}
               <div className="flex items-baseline gap-2 mb-1">
-                  <span className="text-xl font-bold text-white">10x de</span>
-                  <span className="text-5xl md:text-6xl font-black text-white tracking-tighter">R$ 11,66</span>
-                  </div>
-                  <p className="text-sm font-bold mb-6 text-orange-200 uppercase tracking-wider">
-                  ou R$ 97,00 à vista
-                  </p>
+                <span className="text-xl font-bold text-white">10x de</span>
+                <span className="text-5xl md:text-6xl font-black text-white tracking-tighter">R$ 11,66</span>
+              </div>
+              <p className="text-sm font-bold mb-6 text-orange-200 uppercase tracking-wider">
+                ou R$ 97,00 à vista
+              </p>
+              {/* FIM DA ALTERAÇÃO */}
 
               <ul className="text-left space-y-3 mb-10 text-white text-sm flex-grow font-medium">
                 <li className="flex items-start gap-2"><CheckCircle size={18} className="mt-0.5 flex-shrink-0" /> Módulo 1 – Gerando Imagens Profissionais</li>
