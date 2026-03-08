@@ -8,9 +8,9 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 const PrimaryButton = ({ children }) => (
-  <a href="#oferta" className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(234,88,12,0.4)] flex items-center justify-center gap-2 cursor-pointer">
-    {children}
-    <ChevronRight size={20} />
+  <a href="#oferta" className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-3 px-4 sm:px-6 md:py-4 md:px-8 text-xs sm:text-sm md:text-base whitespace-nowrap rounded-full transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(234,88,12,0.4)] flex items-center justify-center gap-1.5 md:gap-2 cursor-pointer text-center">
+    <span>{children}</span>
+    <ChevronRight size={20} className="flex-shrink-0 w-4 h-4 md:w-5 md:h-5" />
   </a>
 );
 
@@ -28,18 +28,18 @@ const App = () => {
   const antesDepoisCasos = [
     {
       id: 1,
-      antes: 'antes-1.jpg',
-      depois: 'depois-1.jpg',
+      antes: 'antes-1.jfif',
+      depois: 'depois-1.jfif',
     },
     {
       id: 2,
-      antes: 'antes-2.jpg',
-      depois: 'depois-2.jpg',
+      antes: 'antes-2.jfif',
+      depois: 'depois-2.jfif',
     },
     {
       id: 3,
-      antes: 'antes-3.jpg',
-      depois: 'depois-3.jpg',
+      antes: 'antes-3.jfif',
+      depois: 'depois-3.jfif',
     },
   ];
 
@@ -181,7 +181,7 @@ const App = () => {
               <ArrowRight size={28} strokeWidth={3} />
             </button>
 
-            {/* Swiper sem Autoplay e com Overflow Hidden */}
+            {/* Swiper com nova classe "antes-depois-swiper" */}
             <Swiper
               modules={[Navigation, Pagination]}
               slidesPerView={1}
@@ -193,8 +193,9 @@ const App = () => {
                 nextEl: '.swiper-button-next-ba',
               }}
               pagination={{ clickable: true, dynamicBullets: true }}
-              className="py-6 pb-20 rounded-3xl"
+              className="pt-6 rounded-3xl antes-depois-swiper"
             >
+
               {antesDepoisCasos.map((caso) => (
                 <SwiperSlide key={caso.id}>
                   <div className="flex flex-col items-center px-4 md:px-10">
@@ -209,7 +210,7 @@ const App = () => {
                         <img
                           src={`/images/${caso.antes}`}
                           alt={`Antes - ${caso.legenda}`}
-                          className="w-full h-[400px] lg:h-[600px] object-cover opacity-60 grayscale-[30%]"
+                          className="w-full h-[400px] lg:h-[600px] object-cover opacity-80 grayscale-[5%]"
                         />
                       </div>
 
@@ -325,7 +326,6 @@ const App = () => {
 
               <div className="text-lg font-bold text-orange-300 line-through mb-1">De R$ 497</div>
 
-              {/* ALTERAÇÃO SOLICITADA: INVERSÃO DOS VALORES */}
               <div className="flex items-baseline gap-2 mb-1">
                 <span className="text-xl font-bold text-white">10x de</span>
                 <span className="text-5xl md:text-6xl font-black text-white tracking-tighter">R$ 11,66</span>
@@ -333,7 +333,6 @@ const App = () => {
               <p className="text-sm font-bold mb-6 text-orange-200 uppercase tracking-wider">
                 ou R$ 97,00 à vista
               </p>
-              {/* FIM DA ALTERAÇÃO */}
 
               <ul className="text-left space-y-3 mb-10 text-white text-sm flex-grow font-medium">
                 <li className="flex items-start gap-2"><CheckCircle size={18} className="mt-0.5 flex-shrink-0" /> Módulo 1 – Gerando Imagens Profissionais</li>
@@ -420,10 +419,23 @@ const App = () => {
           background: #ea580c !important;
           width: 35px !important;
         }
-        .swiper-pagination { bottom: 0 !important; }
 
-        /* Apenas o carrossel de módulos pode vazar nas laterais */
-        .modulos-swiper { overflow: visible !important; }
+        /* MÓDULOS SWIPER */
+        .modulos-swiper {
+          overflow: visible !important;
+          padding-bottom: 40px !important;
+        }
+        .modulos-swiper .swiper-pagination {
+          bottom: 0 !important;
+        }
+
+        /* CARROSSEL ANTES E DEPOIS - CORREÇÃO DA BOLINHA */
+        .antes-depois-swiper {
+          padding-bottom: 70px !important; /* Cria o espaço em branco gigante abaixo das fotos */
+        }
+        .antes-depois-swiper .swiper-pagination {
+          bottom: 15px !important; /* Coloca as bolinhas presas nesse espaço em branco */
+        }
 
         /* Smooth Scroll para âncoras */
         html { scroll-behavior: smooth; }
