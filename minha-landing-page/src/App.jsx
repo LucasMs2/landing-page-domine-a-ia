@@ -28,18 +28,57 @@ const App = () => {
   const antesDepoisCasos = [
     {
       id: 1,
-      antes: 'antes-1.jfif',
-      depois: 'depois-1.jfif',
+      antes: 'Gatorade-Antes.jpeg',
+      depois: 'Gatorade-Depois.jpeg',
+      legenda: 'Gatorade',
     },
     {
       id: 2,
-      antes: 'antes-2.jfif',
-      depois: 'depois-2.jfif',
+      antes: 'antes-1.jfif',
+      depois: 'depois-1.jfif',
+      legenda: 'Exemplo 1',
     },
     {
       id: 3,
+      antes: 'antes-2.jfif',
+      depois: 'depois-2.jfif',
+      legenda: 'Exemplo 2',
+    },
+    {
+      id: 4,
       antes: 'antes-3.jfif',
       depois: 'depois-3.jfif',
+      legenda: 'Exemplo 3',
+    },
+    {
+      id: 5,
+      antes: 'AirPods-Antes.jpeg',
+      depois: 'AirPods-Depois.jpeg',
+      legenda: 'AirPods',
+    },
+    {
+      id: 6,
+      antes: 'Doce-Antes.jpeg',
+      depois: 'Doce-Depois.jpeg',
+      legenda: 'Doce de Leite',
+    },
+    {
+      id: 7,
+      antes: 'Panetone-Antes.jpeg',
+      depois: 'Panetone-Depois.jpeg',
+      legenda: 'Panetone',
+    },
+    {
+      id: 8,
+      antes: 'Mochila-Antes.jpeg',
+      depois: 'Mochila-Depois.jpeg',
+      legenda: 'Mochila',
+    },
+    {
+      id: 9,
+      antes: 'Suco-Antes.jpeg',
+      depois: 'Suco-Depois.jpeg',
+      legenda: 'Suco',
     },
   ];
 
@@ -203,14 +242,14 @@ const App = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 w-full items-center">
 
                       {/* Lado ANTES */}
-                      <div className="relative rounded-3xl overflow-hidden border-2 md:border-4 border-zinc-800 bg-zinc-900 shadow-xl">
+                      <div className="relative rounded-3xl overflow-hidden border-2 md:border-4 border-zinc-800 bg-zinc-900 shadow-xl flex items-center justify-center w-full aspect-[4/5] md:aspect-[3/4]">
                         <div className="absolute top-4 left-4 md:top-6 md:left-6 bg-black/80 text-gray-400 font-bold px-5 py-2 rounded-full text-xs md:text-sm tracking-widest uppercase z-10 backdrop-blur-sm border border-zinc-700 shadow-md">
                           Antes (Resultado Comum)
                         </div>
                         <img
                           src={`/images/${caso.antes}`}
                           alt={`Antes - ${caso.legenda}`}
-                          className="w-full h-[400px] lg:h-[600px] object-cover opacity-80 grayscale-[5%]"
+                          className="absolute inset-0 w-full h-full object-cover opacity-80 grayscale-[5%]"
                         />
                       </div>
 
@@ -219,14 +258,14 @@ const App = () => {
                       </div>
 
                       {/* Lado DEPOIS */}
-                      <div className="relative rounded-3xl overflow-hidden border-2 md:border-4 border-orange-600 shadow-[0_0_40px_rgba(234,88,12,0.3)] bg-black group">
+                      <div className="relative rounded-3xl overflow-hidden border-2 md:border-4 border-orange-600 shadow-[0_0_40px_rgba(234,88,12,0.3)] bg-black group flex items-center justify-center w-full aspect-[4/5] md:aspect-[3/4]">
                         <div className="absolute top-4 right-4 md:top-6 md:right-6 bg-orange-600 text-white font-black px-5 py-2 rounded-full text-xs md:text-sm tracking-widest uppercase z-10 shadow-lg">
                           Depois (Método Dominando a IA)
                         </div>
                         <img
                           src={`/images/${caso.depois}`}
                           alt={`Depois - ${caso.legenda}`}
-                          className="w-full h-[400px] lg:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                         />
                       </div>
                     </div>
@@ -238,7 +277,7 @@ const App = () => {
           </div>
 
           <div className="mt-12 flex justify-center relative z-20">
-             <PrimaryButton>QUERO ESTES RESULTADOS AGORA</PrimaryButton>
+             <PrimaryButton>QUERO ESSES RESULTADOS AGORA</PrimaryButton>
           </div>
         </div>
       </section>
