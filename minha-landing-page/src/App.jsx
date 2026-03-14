@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { nomesComuns } from './data/nomes';
 import './index.css';
 import { ChevronRight, CheckCircle, ShieldCheck, ChevronDown, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -14,8 +15,65 @@ const PrimaryButton = ({ children }) => (
   </a>
 );
 
+const useElementOnScreen = (options) => {
+  const containerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      setIsVisible(entry.isIntersecting);
+    }, options);
+
+    const currentRef = containerRef.current;
+    if (currentRef) observer.observe(currentRef);
+
+    return () => {
+      if (currentRef) observer.unobserve(currentRef);
+    };
+  }, [options]);
+
+  return [containerRef, isVisible];
+};
+
 const App = () => {
   const [faqAberto, setFaqAberto] = useState(null);
+
+  const [videoRef, isVideoVisible] = useElementOnScreen({
+    threshold: 0.1,
+  });
+
+  const [cityInfo, setCityInfo] = useState({ city: 'sua região', viewers: 145 });
+  const [activeNotifications, setActiveNotifications] = useState([]);
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  useEffect(() => {
+    fetch('http://ip-api.com/json/')
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success' && data.city) {
+          setCityInfo({ city: data.city, viewers: 162 });
+        } else {
+          setCityInfo({ city: 'sua região', viewers: 162 });
+        }
+      })
+      .catch(() => setCityInfo({ city: 'sua região', viewers: 162 }));
+
+    const triggerInterval = setInterval(() => {
+      const name1 = nomesComuns[Math.floor(Math.random() * nomesComuns.length)];
+      let name2 = nomesComuns[Math.floor(Math.random() * nomesComuns.length)];
+      while(name1 === name2) {
+        name2 = nomesComuns[Math.floor(Math.random() * nomesComuns.length)];
+      }
+
+      setActiveNotifications([name1, name2]);
+      setShowNotifications(true);
+
+      setTimeout(() => setShowNotifications(false), 5000);
+    }, 12000);
+
+    return () => clearInterval(triggerInterval);
+  }, []);
 
   const modulos = [
     { id: 1, titulo: "Gerando Imagens", img: "CAPA_MÓDULO-GERANDOIMAGENS.png" },
@@ -26,12 +84,7 @@ const App = () => {
   ];
 
   const antesDepoisCasos = [
-    {
-      id: 1,
-      antes: 'Gatorade-Antes.jpeg',
-      depois: 'Gatorade-Depois.jpeg',
-      legenda: 'Gatorade',
-    },
+
     {
       id: 2,
       antes: 'antes-1.jfif',
@@ -128,6 +181,15 @@ const App = () => {
 
       {/* --- INICIAL SECTION --- */}
       <header className="relative min-h-[90vh] flex items-center bg-black overflow-hidden border-b border-orange-900/30">
+        
+        {/* Geolocation Tag */}
+        <div className="absolute top-4 right-4 md:top-8 md:right-8 z-50 bg-black/40 backdrop-blur-md border border-zinc-700/50 rounded-full px-3 py-2 md:px-5 md:py-3 flex items-center gap-2 md:gap-3 shadow-xl transform animate-pulse-slow">
+           <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-green-500 animate-pulse"></div>
+           <span className="text-gray-300 text-[10px] md:text-sm font-medium tracking-wide">
+             <span className="text-white font-black">{cityInfo.viewers}</span> Pessoas na sua cidade <span className="text-orange-500 font-black">{cityInfo.city}</span> estão dominando a IA
+           </span>
+        </div>
+
         <div className="absolute top-1/2 left-[-10%] -translate-y-1/2 w-[500px] lg:w-[800px] h-[500px] lg:h-[800px] bg-orange-600/15 blur-[150px] rounded-full z-0 pointer-events-none"></div>
 
         <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full z-10 opacity-30 lg:opacity-100 pointer-events-none">
@@ -168,9 +230,18 @@ const App = () => {
       </header>
 
       {/* VIDEO SECTION  */}
-      <section className="py-24 bg-black relative z-10 border-b border-zinc-900 overflow-hidden">
+      <section 
+        ref={videoRef}
+        className="py-24 bg-black relative z-10 border-b border-zinc-900 overflow-hidden"
+      >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-orange-600/10 blur-[100px] rounded-full z-0 pointer-events-none"></div>
-        <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
+        <div 
+          className={`max-w-5xl mx-auto px-6 relative z-10 text-center transition-all duration-1000 ease-out transform ${
+            isVideoVisible 
+              ? "translate-x-0 opacity-100" 
+              : "-translate-x-[150%] opacity-0"
+          }`}
+        >
           <div className="mb-10">
             <h2 className="text-3xl md:text-4xl font-black mb-4 italic uppercase tracking-tight">
               VEJA COMO O MÉTODO <span className="text-orange-600">FUNCIONA</span>
@@ -249,7 +320,7 @@ const App = () => {
                         <img
                           src={`/images/${caso.antes}`}
                           alt={`Antes - ${caso.legenda}`}
-                          className="absolute inset-0 w-full h-full object-cover opacity-80 grayscale-[5%]"
+                          className={`absolute inset-0 w-full h-full opacity-80 grayscale-[5%] ${caso.posicaoAntes || 'object-cover'}`}
                         />
                       </div>
 
@@ -265,7 +336,7 @@ const App = () => {
                         <img
                           src={`/images/${caso.depois}`}
                           alt={`Depois - ${caso.legenda}`}
-                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          className={`absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-700 ${caso.posicaoDepois || 'object-cover'}`}
                         />
                       </div>
                     </div>
@@ -502,6 +573,27 @@ const App = () => {
           Fale com o Suporte
         </span>
       </a>
+
+      {/* --- NOTIFICAÇÕES FALSAS --- */}
+      <div className="fixed bottom-6 left-4 md:left-6 z-50 flex flex-col gap-3 pointer-events-none">
+        {activeNotifications.map((name, index) => (
+          <div 
+            key={index}
+            className={`bg-zinc-900/95 backdrop-blur-md border border-zinc-700 p-3 md:p-4 rounded-2xl shadow-[0_10px_40px_rgba(234,88,12,0.15)] flex items-center gap-3 md:gap-4 transition-all duration-500 transform ${
+              showNotifications ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
+            }`}
+            style={{ transitionDelay: showNotifications ? `${index * 150}ms` : '0ms' }}
+          >
+            <div className="bg-green-500 p-2 rounded-full flex-shrink-0">
+              <CheckCircle size={16} className="text-white md:w-5 md:h-5" />
+            </div>
+            <div className="pr-4">
+              <p className="text-white font-black text-xs md:text-sm">{name}</p>
+              <p className="text-gray-300 text-[10px] md:text-xs mt-0.5">adquiriu o curso e está dominando a IA</p>
+            </div>
+          </div>
+        ))}
+      </div>
 
     </div>
   );
