@@ -186,7 +186,12 @@ const App = () => {
         <div className="absolute top-4 right-4 md:top-8 md:right-8 z-50 bg-black/40 backdrop-blur-md border border-zinc-700/50 rounded-full px-3 py-2 md:px-5 md:py-3 flex items-center gap-2 md:gap-3 shadow-xl transform animate-pulse-slow">
            <div className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-green-500 animate-pulse"></div>
            <span className="text-gray-300 text-[10px] md:text-sm font-medium tracking-wide">
-             <span className="text-white font-black">{cityInfo.viewers}</span> Pessoas na sua cidade <span className="text-orange-500 font-black">{cityInfo.city}</span> estão dominando a IA
+             <span className="text-white font-black">{cityInfo.viewers}</span> 
+             {cityInfo.city !== 'sua região' ? (
+               <> Pessoas na sua cidade <span className="text-orange-500 font-black">{cityInfo.city}</span> estão dominando a IA</>
+             ) : (
+               <> pessoas da sua cidade estão dominando a IA</>
+             )}
            </span>
         </div>
 
@@ -403,7 +408,7 @@ const App = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-center">
 
-            <div className="p-10 rounded-3xl bg-zinc-900/30 border border-zinc-800 flex flex-col opacity-40 grayscale pointer-events-none relative transform md:scale-95">
+            <div className="p-10 rounded-3xl bg-zinc-900/30 border border-zinc-800 flex flex-col opacity-55 grayscale pointer-events-none relative transform md:scale-95">
               <h4 className="text-xl font-bold mb-1">DOMINANDO A IA</h4>
               <p className="text-sm font-medium mb-4 text-gray-400">ACESSO ANUAL</p>
 
