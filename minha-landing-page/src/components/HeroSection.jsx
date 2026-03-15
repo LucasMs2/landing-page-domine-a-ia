@@ -1,19 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PrimaryButton from './PrimaryButton';
 import { ShieldCheck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const HeroSection = ({ cityInfo }) => {
-  const [scrollY, setScrollY] = useState(0);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <header className="relative min-h-[90vh] flex items-center bg-black overflow-hidden border-b border-orange-900/30">
@@ -34,10 +25,9 @@ const HeroSection = ({ cityInfo }) => {
       {/* Decorative Blur */}
       <div className="absolute top-1/2 left-[-10%] -translate-y-1/2 w-[500px] lg:w-[800px] h-[500px] lg:h-[800px] bg-orange-600/15 blur-[150px] rounded-full z-0 pointer-events-none"></div>
 
-      {/* Background Image with Parallax */}
+      {/* Background Image */}
       <div 
         className="absolute top-0 right-0 w-full lg:w-1/2 h-full z-10 opacity-30 lg:opacity-100 pointer-events-none"
-        style={{ transform: `translateY(${scrollY * 0.3}px)` }}
       >
         <img
           src="/images/BACKGROUND.PNG"
